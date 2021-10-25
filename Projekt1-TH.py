@@ -43,19 +43,19 @@ heslo = input("Zadejte heslo: ")
 
 if db_uzivatelu.get(uzivatel) == heslo:
     print(oddelovac)
-    print("Vitejte v Aplikaci:", uzivatel)
-    print("K analyze jsou k dispozici 3 texty.")
+    print("Vítejte v Aplikaci:", uzivatel)
+    print("K analýze jsou k dispozici 3 texty.")
     print(oddelovac)
 else:
-    print("Neplatne jmeno nebo heslo. Ukoncuji...")
+    print("Neplatné jméno nebo heslo. Ukončuji...")
     quit()
 
-volba_textu = input("Zadejte text k analyze od 1 do 3: ")
+volba_textu = input("Zadejte text k analýze od 1 do 3: ")
 
 if volba_textu.isdigit() and ((int(volba_textu) - 1) in range(0, 3)):
     print(oddelovac)
 else:
-    print("Zadej cislo v uvedeném rozsahu")
+    print("Zadej číslo v uvedeném rozsahu!")
     quit()
 
 pocet_slov = 0
@@ -78,39 +78,39 @@ for slovo in TEXTS[int(volba_textu) - 1].split():
         pocet_cisel += 1
         ciselne_slovo.append(int(slovo))
 
-# soucet všech čísel
+# Součet všech čísel z vytvořeného listu
 for prvek in ciselne_slovo:
     soucet_cisel += int(prvek)
 
 # Výpis podle zadání
-print(f"Celkový počet slov je: {pocet_slov}")
-print(f"Počet slov zacinajici velkym pismene je: {prvni_velke}")
-print(f"Počet slov, které jsou psané velkými písmeny: {vse_velke}")
-print(f"Počet slov, které jsou psané malými písmeny: {vse_male}")
-print(f"Celkově analyzovaný text obsahuje {pocet_cisel} čísel.")
-print(f"Součet těchto čísel je: {soucet_cisel}")
+print(f"Celkový počet slov je: {pocet_slov}.")
+print(f"Počet slov začínající velkým písmenem je: {prvni_velke}.")
+print(f"Počet slov, které jsou psané velkými písmeny: {vse_velke}.")
+print(f"Počet slov, které jsou psané malými písmeny: {vse_male}.")
+print(f"Celkově analyzovaný text obsahuje {pocet_cisel} číslice.")
+print(f"Součet těchto čísel je: {soucet_cisel}.")
 print(oddelovac)
 
 # Počítání délek slov ve for cyklu
 pocty_slov = dict()
 
 
-# for slovo in TEXTS[0].split():
-
+# Výpočet délek slov a uložení typu klíč:hodnota do slovníčku -- nutno stripnout nežádoucí znaky u slova
 for slovo in TEXTS[int(volba_textu) - 1].split():
+    slovo = slovo.rstrip(",.:;")
     delka = len(slovo)
     if delka not in pocty_slov:
         pocty_slov[delka] = 0
 
     pocty_slov[delka] += 1
 
-# Serazeni slovnicku
+# Serazeni slovnicku klíč:hodnota
 pocty_slov_sorted = dict(sorted(zip(pocty_slov.keys(), pocty_slov.values())))
 
 # Formátování nadpisu pro graf
 print(" LEN|".ljust(4), " OCCURENCES".ljust(14), "|NR".rjust(7))
 print(oddelovac)
 
-# Vykresleni grafu
+# Vykresleni grafu se správným odsazením
 for i, hodnota in enumerate(pocty_slov_sorted.values()):
     print(f"{(i + 1):4}|  {'*' * hodnota:17} |{hodnota:1}")
