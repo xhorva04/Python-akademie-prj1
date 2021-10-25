@@ -50,9 +50,9 @@ else:
     print("Neplatne jmeno nebo heslo. Ukoncuji...")
     quit()
 
-volba_textu = input("Zadejte text k analyze od 0 do 2: ")
+volba_textu = input("Zadejte text k analyze od 1 do 3: ")
 
-if volba_textu.isdigit() and ((int(volba_textu)) in range(0, 3, 1)):
+if volba_textu.isdigit() and ((int(volba_textu) - 1) in range(0, 3)):
     print(oddelovac)
 else:
     print("Zadej cislo v uvedeném rozsahu")
@@ -66,7 +66,7 @@ pocet_cisel = 0
 ciselne_slovo = list()
 soucet_cisel = 0
 
-for slovo in TEXTS[int(volba_textu)].split():
+for slovo in TEXTS[int(volba_textu) - 1].split():
     pocet_slov += 1
     if slovo.istitle():
         prvni_velke += 1
@@ -100,7 +100,7 @@ pocty_slov = dict()
 
 # for slovo in TEXTS[0].split():
 
-for slovo in TEXTS[int(volba_textu)].split():
+for slovo in TEXTS[int(volba_textu) - 1].split():
     delka = len(slovo)
     if delka not in pocty_slov:
         pocty_slov[delka] = 0
