@@ -79,9 +79,6 @@ for slovo in TEXTS[int(volba_textu) - 1].split():
         ciselne_slovo.append(int(slovo))
 
 # soucet všech čísel
-
-print(ciselne_slovo)
-
 for prvek in ciselne_slovo:
     soucet_cisel += int(prvek)
 
