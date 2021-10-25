@@ -36,8 +36,7 @@ db_uzivatelu = {
     'liz': 'pass123',
 }
 
-
-oddelovac = "_" * 64
+oddelovac = "_" * 48
 
 uzivatel = input("Zadejte uživatelské jméno: ")
 heslo = input("Zadejte heslo: ")
@@ -71,29 +70,22 @@ for slovo in TEXTS[int(volba_textu)].split():
     pocet_slov += 1
     if slovo.istitle():
         prvni_velke += 1
-    if slovo.isupper():
+    elif slovo.isupper():
         vse_velke += 1
-    if slovo.islower():
+    elif slovo.islower():
         vse_male += 1
-    if slovo.isnumeric():
+    elif slovo.isnumeric():
         pocet_cisel += 1
-    if slovo.isdigit():
         ciselne_slovo.append(int(slovo))
 
-# Proč nemohu říct for INT(prvek) – prvek je int
+# soucet všech čísel
+
+print(ciselne_slovo)
 
 for prvek in ciselne_slovo:
     soucet_cisel += int(prvek)
 
-
-# Počítání délek slov ve for cyklu
-a = 0
-
-for slovo in TEXTS[int(volba_textu)].split():
-    if len(slovo) == 4:
-        a += 1
-
-
+# Výpis podle zadání
 print(f"Celkový počet slov je: {pocet_slov}")
 print(f"Počet slov zacinajici velkym pismene je: {prvni_velke}")
 print(f"Počet slov, které jsou psané velkými písmeny: {vse_velke}")
@@ -101,3 +93,27 @@ print(f"Počet slov, které jsou psané malými písmeny: {vse_male}")
 print(f"Celkově analyzovaný text obsahuje {pocet_cisel} čísel.")
 print(f"Součet těchto čísel je: {soucet_cisel}")
 print(oddelovac)
+
+# Počítání délek slov ve for cyklu
+pocty_slov = dict()
+
+
+# for slovo in TEXTS[0].split():
+
+for slovo in TEXTS[int(volba_textu)].split():
+    delka = len(slovo)
+    if delka not in pocty_slov:
+        pocty_slov[delka] = 0
+
+    pocty_slov[delka] += 1
+
+# Serazeni slovnicku
+pocty_slov_sorted = dict(sorted(zip(pocty_slov.keys(), pocty_slov.values())))
+
+# Formátování nadpisu pro graf
+print(" LEN|".ljust(4), " OCCURENCES".ljust(14), "|NR".rjust(7))
+print(oddelovac)
+
+# Vykresleni grafu
+for i, hodnota in enumerate(pocty_slov_sorted.values()):
+    print(f"{(i + 1):4}|  {'*' * hodnota:17} |{hodnota:1}")
